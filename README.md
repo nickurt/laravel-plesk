@@ -1,9 +1,9 @@
-## Laravel Plesk
+## Laravel Plesk Onyx 17.8
 
 ### Installation
 Install this package with composer:
 ```
-php composer.phar require nickurt/laravel-plesk:1.*
+composer require nickurt/laravel-plesk:1.*
 ```
 
 Add the provider to config/app.php file

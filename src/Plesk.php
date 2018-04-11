@@ -29,6 +29,16 @@ class Plesk
     }
 
     /**
+     * @param $method
+     * @param $args
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+        return call_user_func_array([$this->base, $method], $args);
+    }
+
+    /**
      * @param null $name
      * @return mixed|\PleskX\Api\Client
      */
@@ -44,7 +54,7 @@ class Plesk
      */
     public function getDefaultServer()
     {
-        return $this->app['config']['plesk-servers.default'];
+        return $this->app['config']['plesk.default'];
     }
 
     /**
@@ -58,21 +68,21 @@ class Plesk
 
     /**
      * @param $name
-     * @return \PleskX\Api\Client
+     * @return Api\Client
      */
     protected function resolve($name)
     {
         $config = $this->getConfig($name);
 
-        $this->client = new \PleskX\Api\Client($config['host']);
-        $this->client->setCredentials(
+        $this->base = new \nickurt\Plesk\Api\Base();
+        $this->base->setHost($config['host']);
+        $this->base->setCredentials(
             $config['username'],
             $config['password']
         );
 
-        return $this->client;
+        return $this->base;
     }
-
 
     /**
      * @param $name
@@ -80,16 +90,6 @@ class Plesk
      */
     protected function getConfig($name)
     {
-        return $this->app['config']["plesk-servers.servers.{$name}"];
-    }
-
-    /**
-     * @param $name
-     * @param $arguments
-     * @return mixed
-     */
-    public function __call($name, $arguments)
-    {
-        return call_user_func_array([$this->client, $name], $arguments);
+        return $this->app['config']["plesk.servers.{$name}"];
     }
 }
