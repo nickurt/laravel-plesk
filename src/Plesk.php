@@ -40,7 +40,7 @@ class Plesk
 
     /**
      * @param null $name
-     * @return mixed|\PleskX\Api\Client
+     * @return mixed|Api\Client
      */
     public function server($name = null)
     {
@@ -59,7 +59,7 @@ class Plesk
 
     /**
      * @param $name
-     * @return mixed|\PleskX\Api\Client
+     * @return mixed|Api\Client
      */
     protected function get($name)
     {
