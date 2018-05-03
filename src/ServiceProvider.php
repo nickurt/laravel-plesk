@@ -35,10 +35,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../src/Resources/Lang', 'plesk');
-
         $this->publishes([
-            __DIR__.'/../src/Resources/Lang' => resource_path('lang/vendor/plesk'),
+            __DIR__.'/../config/plesk.php' => config_path('plesk.php')
         ], 'config');
     }
 
