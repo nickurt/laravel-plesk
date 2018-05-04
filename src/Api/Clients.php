@@ -2,22 +2,22 @@
 
 namespace nickurt\Plesk\Api;
 
-class Clients extends Operator
+class Clients extends AbstractApi
 {
     /**
      * @return mixed
      */
     public function all()
     {
-        return $this->client->request('GET', 'clients');
+        return $this->get('clients');
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    public function get($id)
+    public function read($id)
     {
-        return $this->client->request('GET', 'clients/'.$id);
+        return $this->get('clients/'.$id);
     }
 }

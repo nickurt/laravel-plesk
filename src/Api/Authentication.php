@@ -2,7 +2,7 @@
 
 namespace nickurt\Plesk\Api;
 
-class Authentication extends Operator
+class Authentication extends AbstractApi
 {
     /**
      * @param $params
@@ -10,6 +10,6 @@ class Authentication extends Operator
      */
     public function keys($params)
     {
-        return $this->client->request('POST', 'auth/keys', $params);
+        //
     }
 }

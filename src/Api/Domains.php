@@ -2,22 +2,22 @@
 
 namespace nickurt\Plesk\Api;
 
-class Domains extends Operator
+class Domains extends AbstractApi
 {
     /**
      * @return mixed
      */
     public function all()
     {
-        return $this->client->request('GET', 'domains');
+        return $this->get('domains');
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    public function get($id)
+    public function read($id)
     {
-        return $this->client->request('GET', 'domains/'.$id);
+        return $this->get('domains/'.$id);
     }
 }

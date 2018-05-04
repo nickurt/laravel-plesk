@@ -35,7 +35,7 @@ class Plesk
      */
     public function __call($method, $args)
     {
-        return call_user_func_array([$this->base, $method], $args);
+        return call_user_func_array([$this->client, $method], $args);
     }
 
     /**
@@ -74,14 +74,14 @@ class Plesk
     {
         $config = $this->getConfig($name);
 
-        $this->base = new \nickurt\Plesk\Api\Base();
-        $this->base->setHost($config['host']);
-        $this->base->setCredentials(
+        $this->client = new \nickurt\Plesk\Client();
+        $this->client->setHost($config['host']);
+        $this->client->setCredentials(
             $config['username'],
             $config['password']
         );
 
-        return $this->base;
+        return $this->client;
     }
 
     /**
