@@ -29,6 +29,7 @@ abstract class AbstractApi implements ApiInterface
      * @param $path
      * @param array $parameters
      * @param array $headers
+     * @return mixed
      */
     public function get($path, array $parameters = [], array $headers = [])
     {

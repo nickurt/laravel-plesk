@@ -37,14 +37,17 @@ class Client
     public function api($name)
     {
         switch ($name) {
+            case 'authentication':
+                $api = new \nickurt\Plesk\Api\Authentication($this);
+                break;
             case 'clients':
                 $api = new \nickurt\Plesk\Api\Clients($this);
                 break;
             case 'domains':
                 $api = new \nickurt\Plesk\Api\Domains($this);
                 break;
-            case 'authentication':
-                $api = new \nickurt\Plesk\Api\Authentication($this);
+            case 'extensions':
+                $api = new \nickurt\Plesk\Api\Extensions($this);
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Undefined method called:"%s"', $name));
@@ -66,16 +69,6 @@ class Client
     }
 
     /**
-     * @param $host
-     */
-    public function setHost($host)
-    {
-        $this->getHttpClient()->setOptions([
-            'host' => $host
-        ]);
-    }
-
-    /**
      * @return HttpClient
      */
     public function getHttpClient()
@@ -86,5 +79,15 @@ class Client
         }
 
         return $this->httpClient;
+    }
+
+    /**
+     * @param $host
+     */
+    public function setHost($host)
+    {
+        $this->getHttpClient()->setOptions([
+            'host' => $host
+        ]);
     }
 }
