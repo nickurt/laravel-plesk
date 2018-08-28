@@ -40,6 +40,9 @@ class Client
             case 'authentication':
                 $api = new \nickurt\Plesk\Api\Authentication($this);
                 break;
+            case 'cli':
+                $api = new \nickurt\Plesk\Api\Cli($this);
+                break;
             case 'clients':
                 $api = new \nickurt\Plesk\Api\Clients($this);
                 break;
