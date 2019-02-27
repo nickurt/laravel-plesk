@@ -5,11 +5,26 @@ namespace nickurt\Plesk;
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
+     * Bootstrap the application events.
      *
-     * @var bool
+     * @return void
      */
-    protected $defer = false;
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/plesk.php' => config_path('plesk.php')
+        ], 'config');
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['nickurt\Plesk\Plesk', 'Plesk'];
+    }
 
     /**
      * Register the service provider.
@@ -26,27 +41,5 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         });
 
         $this->app->alias('nickurt\Plesk\Plesk', 'Plesk');
-    }
-
-    /**
-     * Bootstrap the application events.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->publishes([
-            __DIR__.'/../config/plesk.php' => config_path('plesk.php')
-        ], 'config');
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['nickurt\Plesk\Plesk', 'Plesk'];
     }
 }
