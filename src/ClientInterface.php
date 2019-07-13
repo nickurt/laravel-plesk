@@ -2,7 +2,7 @@
 
 namespace nickurt\Plesk;
 
-Interface ClientInterface
+interface ClientInterface
 {
 
 }

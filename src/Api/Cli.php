@@ -5,12 +5,14 @@ namespace nickurt\Plesk\Api;
 class Cli extends AbstractApi
 {
     /**
-     * @param $id
-     * @param $body
+     * @param int $id
+     * @param array $params
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function call($id, $body)
+    public function call($id, $params)
     {
-        //
+        return $this->post('cli/' . $id . '/call', $params);
     }
 
     /**
@@ -22,7 +24,7 @@ class Cli extends AbstractApi
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return mixed
      */
     public function ref($id)

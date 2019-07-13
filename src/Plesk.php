@@ -4,20 +4,14 @@ namespace nickurt\Plesk;
 
 class Plesk
 {
-    /**
-     * @var
-     */
+    /** @var \Illuminate\Foundation\Application */
     protected $app;
 
-    /**
-     * @var array
-     */
-    protected $servers = [];
-
-    /**
-     * @var
-     */
+    /** @var \nickurt\Plesk\Client */
     protected $client;
+
+    /** @var array */
+    protected $servers = [];
 
     /**
      * Plesk constructor.
@@ -39,8 +33,8 @@ class Plesk
     }
 
     /**
-     * @param null $name
-     * @return mixed|Api\Client
+     * @param null|string $name
+     * @return \nickurt\Plesk\Client
      */
     public function server($name = null)
     {
@@ -50,7 +44,7 @@ class Plesk
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getDefaultServer()
     {
@@ -58,8 +52,8 @@ class Plesk
     }
 
     /**
-     * @param $name
-     * @return mixed|Api\Client
+     * @param string $name
+     * @return \nickurt\Plesk\Client
      */
     protected function get($name)
     {
@@ -67,8 +61,8 @@ class Plesk
     }
 
     /**
-     * @param $name
-     * @return Api\Client
+     * @param string $name
+     * @return \nickurt\Plesk\Client
      */
     protected function resolve($name)
     {
@@ -85,8 +79,8 @@ class Plesk
     }
 
     /**
-     * @param $name
-     * @return mixed
+     * @param string $name
+     * @return array
      */
     protected function getConfig($name)
     {

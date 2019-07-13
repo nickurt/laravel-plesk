@@ -6,9 +6,7 @@ use nickurt\Plesk\Client;
 
 abstract class AbstractApi implements ApiInterface
 {
-    /**
-     * @var Client
-     */
+    /** @var \nickurt\Plesk\Client */
     public $client;
 
     /**
@@ -20,26 +18,35 @@ abstract class AbstractApi implements ApiInterface
         $this->client = $client;
     }
 
-    public function delete($path, $body, array $headers = [])
+    /**
+     * @param string $path
+     * @param array $parameters
+     * @param array $headers
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function delete($path, array $parameters = [], array $headers = [])
     {
-        //
+        return $this->client->getHttpClient()->delete(
+            $path,
+            $parameters,
+            $headers
+        );
     }
 
     /**
-     * @param $path
+     * @param string $path
      * @param array $parameters
      * @param array $headers
      * @return mixed
      */
     public function get($path, array $parameters = [], array $headers = [])
     {
-        $response = $this->client->getHttpClient()->get(
+        return $this->client->getHttpClient()->get(
             $path,
             $parameters,
             $headers
         );
-
-        return $response;
     }
 
     public function path($path, $body, array $headers = [])
@@ -47,13 +54,35 @@ abstract class AbstractApi implements ApiInterface
         //
     }
 
+    /**
+     * @param string $path
+     * @param array $body
+     * @param array $headers
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function post($path, $body, array $headers = [])
     {
-        //
+        return $this->client->getHttpClient()->post(
+            $path,
+            $body,
+            $headers
+        );
     }
 
+    /**
+     * @param string $path
+     * @param array $body
+     * @param array $headers
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function put($path, $body, array $headers = [])
     {
-        //
+        return $this->client->getHttpClient()->put(
+            $path,
+            $body,
+            $headers
+        );
     }
 }

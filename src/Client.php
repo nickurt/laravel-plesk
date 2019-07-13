@@ -6,14 +6,10 @@ use nickurt\Plesk\HttpClient\HttpClient;
 
 class Client
 {
-    /**
-     * @var
-     */
+    /** @var \nickurt\Plesk\HttpClient\HttpClient */
     protected $httpClient;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $options = [];
 
     /**
@@ -31,8 +27,8 @@ class Client
     }
 
     /**
-     * @param $name
-     * @return Api\Authentication|Api\Clients|Api\Domains
+     * @param string $name
+     * @return Api\Authentication|Api\Cli|Api\Clients|Api\Domains|Api\Extensions|Api\Server
      */
     public function api($name)
     {
@@ -52,6 +48,9 @@ class Client
             case 'extensions':
                 $api = new \nickurt\Plesk\Api\Extensions($this);
                 break;
+            case 'server':
+                $api = new \nickurt\Plesk\Api\Server($this);
+                break;
             default:
                 throw new \InvalidArgumentException(sprintf('Undefined method called:"%s"', $name));
                 break;
@@ -60,8 +59,8 @@ class Client
     }
 
     /**
-     * @param $username
-     * @param $password
+     * @param string $username
+     * @param string $password
      */
     public function setCredentials($username, $password)
     {
@@ -85,7 +84,7 @@ class Client
     }
 
     /**
-     * @param $host
+     * @param string $host
      */
     public function setHost($host)
     {

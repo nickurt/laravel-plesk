@@ -4,51 +4,33 @@ namespace nickurt\Plesk\HttpClient;
 
 class HttpClient implements HttpClientInterface
 {
-    /**
-     * @var \GuzzleHttp\Client
-     */
+    /** @var \GuzzleHttp\Client */
     protected $client;
 
-    /**
-     * @var array
-     */
-    protected $options = [];
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $headers = [
         'Content-Type' => 'application/json',
         'Accept' => 'application/json'
     ];
 
-    /**
-     * HttpClient constructor.
-     */
-    public function __construct()
-    {
-        $this->client = new \GuzzleHttp\Client();
-    }
-
-    public function delete($path, $body, array $headers = [])
-    {
-        //
-    }
-
-    /**
-     * @param $path
-     * @param array $parameters
-     * @param array $headers
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function get($path, array $parameters = [], array $headers = [])
-    {
-        return $this->request($path, $parameters, 'GET', $headers);
-    }
+    /** @var array */
+    protected $options = [];
 
     /**
      * @param $path
      * @param $body
+     * @param array $headers
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function delete($path, $body, array $headers = [])
+    {
+        return $this->request($path, $body, 'DELETE', $headers);
+    }
+
+    /**
+     * @param string $path
+     * @param array $body
      * @param string $httpMethod
      * @param array $headers
      * @param array $options
@@ -58,12 +40,51 @@ class HttpClient implements HttpClientInterface
     {
         $fullPath = sprintf('%s:%d/%s/%s', $this->getOptions()['host'], '8443', 'api/v2', $path);
 
-        $response = $this->client->request($httpMethod, $fullPath, [
+        $response = $this->getClient()->request($httpMethod, $fullPath, [
             'auth' => [$this->getOptions()['username'], $this->getOptions()['password']],
-            'headers' => $this->getHeaders()
+            'headers' => $this->getHeaders(),
+            'body' => $body ? $body : null
         ]);
 
         return json_decode($response->getBody(), true);
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = array_merge($this->options, $options);
+    }
+
+    /**
+     * @return \GuzzleHttp\Client
+     */
+    public function getClient()
+    {
+        if (!isset($this->client)) {
+            $this->client = new \GuzzleHttp\Client();
+
+            return $this->client;
+        }
+
+        return $this->client;
+    }
+
+    /**
+     * @param $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
     }
 
     /**
@@ -83,19 +104,14 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return array
+     * @param string $path
+     * @param array $parameters
+     * @param array $headers
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getOptions()
+    public function get($path, array $parameters = [], array $headers = [])
     {
-        return $this->options;
-    }
-
-    /**
-     * @param array $options
-     */
-    public function setOptions(array $options)
-    {
-        $this->options = array_merge($this->options, $options);
+        return $this->request($path, $parameters, 'GET', $headers);
     }
 
     public function path($path, $body, array $headers = [])
@@ -103,13 +119,27 @@ class HttpClient implements HttpClientInterface
         //
     }
 
+    /**
+     * @param string $path
+     * @param array $body
+     * @param array $headers
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function post($path, $body, array $headers = [])
     {
-        //
+        return $this->request($path, $body, 'POST', $headers);
     }
 
+    /**
+     * @param $path
+     * @param $body
+     * @param array $headers
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function put($path, $body, array $headers = [])
     {
-        //
+        return $this->request($path, $body, 'PUT', $headers);
     }
 }

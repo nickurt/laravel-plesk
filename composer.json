@@ -9,7 +9,8 @@
         "guzzlehttp/guzzle": "6.*"
     },
     "require-dev": {
-        "phpunit/phpunit" : "^7.5"
+        "phpunit/phpunit" : "^7.5",
+        "orchestra/testbench": "^3.8"
     },
     "autoload": {
         "psr-4": {
@@ -18,6 +19,15 @@
         "files": [
             "src/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "nickurt\\Plesk\\tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
