@@ -1,8 +1,9 @@
 ## Laravel Plesk Onyx 17.8
-[![Latest Stable Version](https://poser.pugx.org/nickurt/laravel-plesk/v/stable?format=flat-square)](https://packagist.org/packages/nickurt/laravel-plesk)
-[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/nickurt/laravel-plesk/master.svg?style=flat-square)](https://travis-ci.org/nickurt/laravel-plesk)
-[![Total Downloads](https://img.shields.io/packagist/dt/nickurt/laravel-plesk.svg?style=flat-square)](https://packagist.org/packages/nickurt/laravel-plesk)
+[![Build Status](https://github.com/nickurt/laravel-plesk/workflows/tests/badge.svg)](https://github.com/nickurt/laravel-plesk/actions)
+[![Total Downloads](https://poser.pugx.org/nickurt/laravel-plesk/d/total.svg)](https://packagist.org/packages/nickurt/laravel-plesk)
+[![Latest Stable Version](https://poser.pugx.org/nickurt/laravel-plesk/v/stable.svg)](https://packagist.org/packages/nickurt/laravel-plesk)
+[![MIT Licensed](https://poser.pugx.org/nickurt/laravel-plesk/license.svg)](LICENSE.md)
+
 ### Installation
 Install this package with composer:
 ```
